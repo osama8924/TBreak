@@ -249,6 +249,23 @@
         margin: 0;
         z-index: 1003;
     }
+    /* Disable hover/active scaling on mobile to avoid layout shifts when tapping */
+    .navbar-brand,
+    .navbar-brand:hover,
+    .navbar-brand:active,
+    .navbar-brand:focus {
+        transform: translate(-50%, -50%);
+    }
+
+    .navbar-brand {
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+
+    /* Keep logo image stable on touch (no scale transition) */
+    .navbar-logo {
+        transition: box-shadow 0.3s ease; /* keep shadow but remove transform */
+    }
 
     .navbar-container {
         gap: 1rem;
