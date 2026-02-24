@@ -21,6 +21,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 2rem;
+    position: relative;
 }
 
 /* Brand/Logo */
@@ -187,7 +188,7 @@
     border: none;
     cursor: pointer;
     gap: 6px;
-    z-index: 1001;
+    z-index: 1002;
 }
 
 .menu-toggle span {
@@ -224,15 +225,29 @@
         border-bottom: 2px solid var(--main-orange);
         max-height: 0;
         overflow: hidden;
-        transition: max-height 0.3s ease;
+        transition: max-height 0.3s ease, opacity 0.2s ease;
+        opacity: 0;
+        pointer-events: none;
     }
 
     .nav-menu.active {
         max-height: 400px;
+        opacity: 1;
+        pointer-events: auto;
     }
 
     .menu-toggle {
         display: flex;
+    }
+
+    /* Center the navbar logo on small screens (phones/tablets) */
+    .navbar-brand {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+        z-index: 1003;
     }
 
     .navbar-container {
@@ -494,55 +509,62 @@ body::before {
 .suhoor-full-card:hover .suhoor-image::before {
     background: linear-gradient(180deg, rgba(255, 102, 0, 0.25) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.8) 100%);
 }
-
-/* Responsive Banners */
+/* Responsive Banners - ضبط الصور لتكون كاملة على الموبايل */
 @media (max-width: 768px) {
-    .Iftar-image {
-        height: 280px;
-    }
-
-    .Iftar-image::after {
-        font-size: 1rem;
-        bottom: 15px;
-        right: 15px;
-    }
-
+    /* بدلاً من الارتفاع الثابت، نجعله يتكيف مع الصورة */
+    .Iftar-image, 
     .suhoor-full-card {
-        height: 280px;
+        height: auto; /* مهم جداً لظهور الصورة كاملة */
+        min-height: 200px; /* لضمان وجود مساحة كافية */
     }
 
+    /* ضبط النصوص التوضيحية (After) */
+    .Iftar-image::after,
     .suhoor-image::after {
-        font-size: 1rem;
-        bottom: 15px;
-        left: 15px;
+        font-size: 0.9rem;
+        padding: 6px 10px;
+        bottom: 10px;
+    }
+
+    /* تحسين شكل الصور داخل الحاويات */
+    .Iftar-image img,
+    .suhoor-image img {
+        width: 100%;
+        height: auto; /* الحفاظ على أبعاد الصورة الأصلية */
+        object-fit: contain; /* يضمن عدم قص أي بكسل */
+        display: block;
     }
 }
 
 @media (max-width: 480px) {
-    .Iftar-image {
-        height: 200px;
-    }
-
-    .Iftar-image::after {
-        font-size: 0.9rem;
-        padding: 8px 12px;
-        bottom: 10px;
-        right: 10px;
-    }
-
+    /* تنسيق خاص للهواتف الصغيرة */
+    .Iftar-image, 
     .suhoor-full-card {
-        height: 200px;
+        margin: 10px auto;
+        width: 95%; /* استغلال مساحة الشاشة */
     }
 
-    .suhoor-image::after {
-        font-size: 0.9rem;
-        padding: 8px 12px;
-        bottom: 10px;
-        left: 10px;
+    /* تصغير الخطوط لتناسب الشاشة الصغيرة */
+    .section-title {
+        font-size: 1.4rem;
     }
 }
 
-/* Animations */
+/* Animations - إضافة لمسة احترافية عند التمرير */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.item-card {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
 @keyframes slideInDown {
     from {
         opacity: 0;
@@ -591,16 +613,6 @@ body::before {
 .menu-page {
     padding: 60px 20px;
     max-width: 1200px;
-    margin: 0 auto;
-}
-
-.section-title {
-    text-align: center;
-    font-size: 2.5rem;
-    color: var(--main-orange);
-    margin-bottom: 50px;
-    border-bottom: 2px solid var(--gold);
-    display: table;
     margin-left: auto;
     margin-right: auto;
     padding-bottom: 10px;
@@ -743,7 +755,14 @@ body::before {
     height: auto; /* الصورة تظهر بنسبتها الطبيعية */
     display: block;
 }
+.item-image img {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+}
 
+.item-card:hover img {
+    transform: scale(1.16); /* تكبير بسيط جداً عند الوقوف بالماوس */
+}
 /* تنسيق النصوص أسفل الصورة مباشرة */
 .item-info {
     padding: 15px;
