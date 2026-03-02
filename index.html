@@ -217,18 +217,22 @@
             text-shadow: 0 0 20px rgba(255, 102, 0, 0.4);
         }
 
-        /* ===== FULL WIDTH BANNER ===== */
+        /* ===== RECTANGULAR BANNER with OVERLAP ===== */
         .full-banner {
-            width: 100vw;
+            width: 100%;
+            max-width: 1250px;
+            height: 750px;
+            /* Increased from 520px for better visibility */
+            margin: 0 auto;
             position: relative;
-            right: 50%;
-            left: 50%;
-            margin-right: -50vw;
-            margin-left: -50vw;
-            height: 420px;
             overflow: hidden;
-            margin-bottom: 50px;
-            border-radius: 0;
+            border-radius: 40px;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            transition: all 0.5s ease;
         }
 
         .full-banner img {
@@ -236,67 +240,84 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            transition: transform 8s ease;
+            transition: transform 15s ease;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
         }
 
         .full-banner:hover img {
-            transform: scale(1.04);
+            transform: scale(1.15);
         }
 
         .full-banner-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.2) 55%, transparent 100%);
-            display: flex;
-            align-items: flex-end;
-            padding: 40px 60px;
-            direction: rtl;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), transparent 40%, transparent 60%, rgba(0, 0, 0, 0.3));
+            z-index: 2;
         }
 
-        .full-banner-text h2 {
-            color: #fff;
-            font-size: 2.4rem;
-            font-weight: 900;
-            margin: 0 0 8px;
-            text-shadow: 0 3px 14px rgba(0, 0, 0, 0.9);
-        }
-
-        .full-banner-text p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.1rem;
-            margin: 0;
+        .overlap-content {
+            position: relative;
+            z-index: 10;
+            margin-top: -375px;
+            /* Half of 750px banner height */
+            padding: 0 20px;
         }
 
         .full-banner-tag {
             position: absolute;
-            top: 25px;
-            right: 35px;
-            background: linear-gradient(135deg, var(--main-orange), #ff8533);
+            top: 40px;
+            right: 50px;
+            background: var(--main-orange);
             color: #fff;
             font-weight: 800;
-            font-size: 0.95rem;
-            padding: 8px 22px;
+            font-size: 0.9rem;
+            padding: 8px 25px;
             border-radius: 30px;
-            box-shadow: 0 4px 16px rgba(255, 102, 0, 0.55);
-            animation: pulse 2.5s infinite;
-            letter-spacing: 0.5px;
+            z-index: 4;
+            box-shadow: 0 10px 25px rgba(255, 102, 0, 0.4);
+            letter-spacing: 1px;
+            text-shadow: none;
+        }
+
+        @media (max-width: 1024px) {
+            .full-banner {
+                max-width: 95%;
+                height: 450px;
+            }
+
+            .shiny-title {
+                font-size: 2.8rem;
+            }
         }
 
         @media (max-width: 768px) {
             .full-banner {
-                height: 240px;
+                width: 100vw !important;
+                max-width: none !important;
+                left: 50% !important;
+                right: 50% !important;
+                margin-left: -50vw !important;
+                margin-right: -50vw !important;
+                height: 350px;
+                border-radius: 0;
             }
 
-            .full-banner-overlay {
-                padding: 22px 28px;
+            .overlap-content {
+                margin-top: -175px;
+                /* Half of 350px banner height */
+                padding: 0 15px;
             }
 
-            .full-banner-text h2 {
-                font-size: 1.5rem;
+            .shiny-title {
+                font-size: 2rem;
             }
 
-            .full-banner-text p {
-                font-size: 0.9rem;
+            .full-banner-tag {
+                top: 20px;
+                right: 20px;
             }
         }
 
@@ -480,6 +501,7 @@
                 <li class="nav-item"><a href="#home" class="nav-link active">Home</a></li>
                 <li class="nav-item"><a href="#iftar" class="nav-link">Iftar</a></li>
                 <li class="nav-item"><a href="#suhoor" class="nav-link">Suhoor</a></li>
+                <li class="nav-item"><a href="#juices" class="nav-link">Drinks</a></li>
                 <li class="nav-item"><a href="#konafa" class="nav-link">Konafa 🍯</a></li>
                 <li class="nav-item whatsapp-item">
                     <a href="https://wa.me/201283919772" class="whatsapp-number" target="_blank"
@@ -501,187 +523,196 @@
         <!-- ===== IFTAR SECTION ===== -->
         <section id="iftar" class="menu-page">
             <!-- Iftar Title -->
-            <div style="text-align: center; margin-bottom: 22px;">
+            <div style="text-align: center; margin-bottom: 25px; padding-top: 20px;">
                 <h2 class="section-title"
-                    style="color: #fff; font-size: 2.2rem; font-weight: 900; margin: 0 0 8px; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">
-                    🌙 إفطار رمضان 2026</h2>
-                <p style="color: rgba(255,255,255,0.65); font-size: 1rem; margin: 0;">أشهى الأطباق على مائدتك الرمضانية
-                    — السعر شامل 14% ضريبة القيمة المضافة</p>
+                    style="color: #fff; font-size: 2.4rem; font-weight: 900; margin: 0 0 10px; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">
+                    🌙 منيو الإفطار <span>(Iftar Menu)</span></h2>
+                <p style="color: rgba(255,255,255,0.7); font-size: 1.1rem; margin: 0;">أشهى الأطباق على مائدتك الرمضانية
+                </p>
             </div>
 
-            <!-- Iftar Banner - Full Width -->
+            <!-- Iftar Banner -->
             <div class="full-banner">
                 <img src="iftar.jpg" alt="Iftar Menu 2026">
+                <div class="full-banner-overlay"></div>
                 <span class="full-banner-tag">الإفطار</span>
             </div>
 
-            <!-- Main Dishes Cards -->
-            <div class="menu-grid">
-                <div class="item-card">
-                    <div class="item-image"><img src="chicken lemon rosemary.jpg" alt="تشيكن ليمون روزماري"></div>
-                    <div class="item-info">
-                        <h3>تشيكن ليمون روزماري <span>Chicken Lemon Rosemary</span></h3>
-                        <p>دجاج مشوي بصوص الليمون المنعش وأوراق الروزماري</p>
-                        <span class="price">305 EGP</span>
+            <!-- Menu Cards Content -->
+            <div class="overlap-content">
+                <div class="menu-grid">
+                    <div class="item-card">
+                        <div class="item-image"><img src="chicken lemon rosemary.jpg" alt="تشيكن ليمون روزماري"></div>
+                        <div class="item-info">
+                            <h3>تشيكن ليمون روزماري <span>Chicken Lemon Rosemary</span></h3>
+                            <p>دجاج مشوي بصوص الليمون المنعش وأوراق الروزماري</p>
+                            <span class="price">305 EGP</span>
+                        </div>
+                    </div>
+                    <div class="item-card">
+                        <div class="item-image"><img src="chicken parmesan.jpg" alt="تشيكن برميجان"></div>
+                        <div class="item-info">
+                            <h3>تشيكن برميجان <span>Chicken Parmesan</span></h3>
+                            <p>دجاج مغطى بجبنة البارميزان وصوص الطماطم الإيطالي</p>
+                            <span class="price">315 EGP</span>
+                        </div>
+                    </div>
+                    <div class="item-card">
+                        <div class="item-image"><img src="american chicken.jpg" alt="تشيكن امريكان"></div>
+                        <div class="item-info">
+                            <h3>تشيكن امريكان <span>American Chicken</span></h3>
+                            <p>صدور دجاج مقلية مقرمشة على الطريقة الأمريكية</p>
+                            <span class="price">305 EGP</span>
+                        </div>
+                    </div>
+                    <div class="item-card">
+                        <div class="item-image"><img src="shish tawook.jpg" alt="شيش طاووق"></div>
+                        <div class="item-info">
+                            <h3>شيش طاووق <span>Shish Tawook</span></h3>
+                            <p>قطع دجاج متبلة ومشوية بخلطة TBreak المميزة</p>
+                            <span class="price">285 EGP</span>
+                        </div>
+                    </div>
+                    <div class="item-card">
+                        <div class="item-image"><img src="chicken fajita.jpg" alt="تشيكن فاهيتا"></div>
+                        <div class="item-info">
+                            <h3>تشيكن فاهيتا <span>Chicken Fajita</span></h3>
+                            <p>شرائح دجاج مشوية مع الفلفل والألوان والبهارات المكسيكية</p>
+                            <span class="price">295 EGP</span>
+                        </div>
+                    </div>
+                    <div class="item-card">
+                        <div class="item-image"><img src="chicken corden bleu.jpg" alt="كوردن بلو"></div>
+                        <div class="item-info">
+                            <h3>كوردن بلو <span>Chicken Cordon Bleu</span></h3>
+                            <p>صدور دجاج محشوة بالجبن السويسري واللحم المدخن</p>
+                            <span class="price">320 EGP</span>
+                        </div>
                     </div>
                 </div>
-                <div class="item-card">
-                    <div class="item-image"><img src="chicken parmesan.jpg" alt="تشيكن برميجان"></div>
-                    <div class="item-info">
-                        <h3>تشيكن برميجان <span>Chicken Parmesan</span></h3>
-                        <p>دجاج مغطى بجبنة البارميزان وصوص الطماطم الإيطالي</p>
-                        <span class="price">315 EGP</span>
-                    </div>
-                </div>
-                <div class="item-card">
-                    <div class="item-image"><img src="american chicken.jpg" alt="تشيكن امريكان"></div>
-                    <div class="item-info">
-                        <h3>تشيكن امريكان <span>American Chicken</span></h3>
-                        <p>صدور دجاج مقلية مقرمشة على الطريقة الأمريكية</p>
-                        <span class="price">305 EGP</span>
-                    </div>
-                </div>
-                <div class="item-card">
-                    <div class="item-image"><img src="shish tawook.jpg" alt="شيش طاووق"></div>
-                    <div class="item-info">
-                        <h3>شيش طاووق <span>Shish Tawook</span></h3>
-                        <p>قطع دجاج متبلة ومشوية بخلطة TBreak المميزة</p>
-                        <span class="price">285 EGP</span>
-                    </div>
-                </div>
-                <div class="item-card">
-                    <div class="item-image"><img src="chicken fajita.jpg" alt="تشيكن فاهيتا"></div>
-                    <div class="item-info">
-                        <h3>تشيكن فاهيتا <span>Chicken Fajita</span></h3>
-                        <p>شرائح دجاج مشوية مع الفلفل والألوان والبهارات المكسيكية</p>
-                        <span class="price">295 EGP</span>
-                    </div>
-                </div>
-                <div class="item-card">
-                    <div class="item-image"><img src="chicken corden bleu.jpg" alt="كوردن بلو"></div>
-                    <div class="item-info">
-                        <h3>كوردن بلو <span>Chicken Cordon Bleu</span></h3>
-                        <p>صدور دجاج محشوة بالجبن السويسري واللحم المدخن</p>
-                        <span class="price">320 EGP</span>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Soups & Appetizers -->
-            <div class="section-divider" style="margin-top: 55px;">
-                <h3>🍲 الشوربة والمقبلات</h3>
-            </div>
-            <div
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 28px; direction: rtl;">
-                <div class="price-card">
-                    <div class="price-card-title">🍲 الشوربـة</div>
-                    <ul class="price-list">
-                        <li><span>شوربة كريمة فراخ</span><strong>75 EGP</strong></li>
-                        <li><span>شوربة كريمة مشروم</span><strong>65 EGP</strong></li>
-                        <li><span>شوربة لسان عصفور</span><strong>45 EGP</strong></li>
-                    </ul>
+                <!-- Soups & Appetizers -->
+                <div class="section-divider" style="margin-top: 55px;">
+                    <h3>🍲 الشوربة والمقبلات</h3>
                 </div>
-                <div class="price-card">
-                    <div class="price-card-title">🥗 المقبـلات</div>
-                    <ul class="price-list">
-                        <li><span>بطاطس محمرة</span><strong>65 EGP</strong></li>
-                        <li><span>دبوس فرايد</span><strong>185 EGP</strong></li>
-                        <li><span>موتزريلا استيك</span><strong>80 EGP</strong></li>
-                        <li><span>بوتيتو بولز</span><strong>75 EGP</strong></li>
-                    </ul>
+                <div
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 28px; direction: rtl;">
+                    <div class="price-card">
+                        <div class="price-card-title">🍲 الشوربـة</div>
+                        <ul class="price-list">
+                            <li><span>شوربة كريمة فراخ</span><strong>75 EGP</strong></li>
+                            <li><span>شوربة كريمة مشروم</span><strong>65 EGP</strong></li>
+                            <li><span>شوربة لسان عصفور</span><strong>45 EGP</strong></li>
+                        </ul>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-card-title">🥗 المقبـلات</div>
+                        <ul class="price-list">
+                            <li><span>بطاطس محمرة</span><strong>65 EGP</strong></li>
+                            <li><span>دبوس فرايد</span><strong>185 EGP</strong></li>
+                            <li><span>موتزريلا استيك</span><strong>80 EGP</strong></li>
+                            <li><span>بوتيتو بولز</span><strong>75 EGP</strong></li>
+                        </ul>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-card-title">🍽️ أطباق إضافية</div>
+                        <ul class="price-list">
+                            <li><span>سبانش رول</span><strong>300 EGP</strong></li>
+                            <li><span>كفتة وايت صوص</span><strong>295 EGP</strong></li>
+                            <li><span>تشيكن كرانشي</span><strong>305 EGP</strong></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="price-card">
-                    <div class="price-card-title">🍽️ أطباق إضافية</div>
-                    <ul class="price-list">
-                        <li><span>سبانش رول</span><strong>300 EGP</strong></li>
-                        <li><span>كفتة وايت صوص</span><strong>295 EGP</strong></li>
-                        <li><span>تشيكن كرانشي</span><strong>305 EGP</strong></li>
-                    </ul>
-                </div>
-            </div>
 
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="https://wa.me/201283919772?text=أرغب%20في%20طلب%20إفطار" class="order-btn" target="_blank"
-                    style="display: inline-block; font-size: 1.1rem; padding: 14px 36px;">📱 اطلب إفطارك الآن عبر
-                    واتساب</a>
+                <div style="text-align: center; margin-top: 40px; padding-bottom: 60px;">
+                    <a href="https://wa.me/201283919772?text=أرغب%20في%20طلب%20إفطار" class="order-btn" target="_blank"
+                        style="display: inline-block; font-size: 1.1rem; padding: 14px 36px;">📱 اطلب إفطارك الآن عبر
+                        واتساب</a>
+                </div>
             </div>
         </section>
 
         <!-- ===== SUHOOR SECTION ===== -->
         <section id="suhoor" class="menu-page">
             <!-- Suhoor Title -->
-            <div style="text-align: center; margin-bottom: 22px;">
+            <div style="text-align: center; margin-bottom: 25px; padding-top: 20px;">
                 <h2 class="section-title"
-                    style="color: #fff; font-size: 2.2rem; font-weight: 900; margin: 0 0 8px; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">
-                    ⭐ سحور رمضان 2026</h2>
-                <p style="color: rgba(255,255,255,0.65); font-size: 1rem; margin: 0;">وجبة شهية قبيل الفجر — السعر شامل
-                    14% ضريبة القيمة المضافة</p>
+                    style="color: #fff; font-size: 2.4rem; font-weight: 900; margin: 0 0 10px; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">
+                    ⭐ منيو السحور <span>(Suhoor Menu)</span></h2>
+                <p style="color: rgba(255,255,255,0.7); font-size: 1.1rem; margin: 0;">وجبة شهية قبيل الفجر</p>
             </div>
 
-            <!-- Suhoor Banner - Full Width -->
+            <!-- Suhoor Banner -->
             <div class="full-banner">
                 <img src="sahour6.jpg" alt="Suhoor Menu 2026">
-                <span class="full-banner-tag" style="right: auto; left: 30px;">السحور</span>
+                <div class="full-banner-overlay"></div>
+                <span class="full-banner-tag" style="right: auto; left: 60px;">السحور</span>
             </div>
 
-            <!-- Suhoor images gallery -->
-            <div
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 50px;">
-                <img src="sahour1.jpg" alt="Suhoor 1"
-                    style="width: 100%; height: 160px; object-fit: cover; border-radius: 14px; border: 1px solid rgba(255,102,0,0.2); box-shadow: 0 5px 15px rgba(0,0,0,0.4);">
-                <img src="sahour2.jpg" alt="Suhoor 2"
-                    style="width: 100%; height: 160px; object-fit: cover; border-radius: 14px; border: 1px solid rgba(255,102,0,0.2); box-shadow: 0 5px 15px rgba(0,0,0,0.4);">
-                <img src="sahour3.jpg" alt="Suhoor 3"
-                    style="width: 100%; height: 160px; object-fit: cover; border-radius: 14px; border: 1px solid rgba(255,102,0,0.2); box-shadow: 0 5px 15px rgba(0,0,0,0.4);">
-                <img src="sahour4.jpg" alt="Suhoor 4"
-                    style="width: 100%; height: 160px; object-fit: cover; border-radius: 14px; border: 1px solid rgba(255,102,0,0.2); box-shadow: 0 5px 15px rgba(0,0,0,0.4);">
-            </div>
+            <!-- Menu Cards Content -->
+            <div class="overlap-content">
+                <!-- Suhoor images gallery -->
+                <div class="suhoor-gallery">
+                    <div class="gallery-item">
+                        <img src="sahour1.jpg" alt="Suhoor 1">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="sahour2.jpg" alt="Suhoor 2">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="sahour3.jpg" alt="Suhoor 3">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="sahour4.jpg" alt="Suhoor 4">
+                    </div>
+                </div>
 
-            <!-- Suhoor Price Tables -->
-            <div
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 28px; direction: rtl;">
-                <!-- Foul -->
-                <div class="price-card">
-                    <div class="price-card-title">🫘 فـول</div>
-                    <ul class="price-list">
-                        <li><span>فول بزيت الذرة</span><strong>55 EGP</strong></li>
-                        <li><span>فول بزيت الزيتون</span><strong>65 EGP</strong></li>
-                        <li><span>فول بالليمون المعصفر</span><strong>65 EGP</strong></li>
-                        <li><span>فول بيض مسلوق</span><strong>65 EGP</strong></li>
-                        <li><span>فول بالبسطرمة</span><strong>70 EGP</strong></li>
-                        <li><span>طاجن اسكندراني بالحمص والبيض</span><strong>65 EGP</strong></li>
-                    </ul>
+                <!-- Suhoor Price Tables -->
+                <div
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 28px; direction: rtl;">
+                    <!-- Foul -->
+                    <div class="price-card">
+                        <div class="price-card-title">🫘 فـول</div>
+                        <ul class="price-list">
+                            <li><span>فول بزيت الذرة</span><strong>55 EGP</strong></li>
+                            <li><span>فول بزيت الزيتون</span><strong>65 EGP</strong></li>
+                            <li><span>فول بالليمون المعصفر</span><strong>65 EGP</strong></li>
+                            <li><span>فول بيض مسلوق</span><strong>65 EGP</strong></li>
+                            <li><span>فول بالبسطرمة</span><strong>70 EGP</strong></li>
+                            <li><span>طاجن اسكندراني بالحمص والبيض</span><strong>65 EGP</strong></li>
+                        </ul>
+                    </div>
+                    <!-- Taameya & Eggs -->
+                    <div class="price-card">
+                        <div class="price-card-title">🍳 طعمية والبيض</div>
+                        <ul class="price-list">
+                            <li><span>طعمية سادة</span><strong>40 EGP</strong></li>
+                            <li><span>طعمية كيري</span><strong>65 EGP</strong></li>
+                            <li><span>طعمية بالخلطة</span><strong>45 EGP</strong></li>
+                            <li><span>بيض مسلوق</span><strong>50 EGP</strong></li>
+                            <li><span>بيض اومليت</span><strong>55 EGP</strong></li>
+                            <li><span>بيض بالبسطرمة</span><strong>65 EGP</strong></li>
+                        </ul>
+                    </div>
+                    <!-- Salads & Sides -->
+                    <div class="price-card">
+                        <div class="price-card-title">🥗 مقبلات وجبنة</div>
+                        <ul class="price-list">
+                            <li><span>جبنة بالطماطم</span><strong>55 EGP</strong></li>
+                            <li><span>سلطة بلدي</span><strong>40 EGP</strong></li>
+                            <li><span>سلطة حمص</span><strong>65 EGP</strong></li>
+                            <li><span>طماطم متبلة</span><strong>40 EGP</strong></li>
+                            <li><span>مخلل</span><strong>35 EGP</strong></li>
+                            <li><span>ليمون معصفر</span><strong>40 EGP</strong></li>
+                        </ul>
+                    </div>
                 </div>
-                <!-- Taameya & Eggs -->
-                <div class="price-card">
-                    <div class="price-card-title">🍳 طعمية والبيض</div>
-                    <ul class="price-list">
-                        <li><span>طعمية سادة</span><strong>40 EGP</strong></li>
-                        <li><span>طعمية كيري</span><strong>65 EGP</strong></li>
-                        <li><span>طعمية بالخلطة</span><strong>45 EGP</strong></li>
-                        <li><span>بيض مسلوق</span><strong>50 EGP</strong></li>
-                        <li><span>بيض اومليت</span><strong>55 EGP</strong></li>
-                        <li><span>بيض بالبسطرمة</span><strong>65 EGP</strong></li>
-                    </ul>
-                </div>
-                <!-- Salads & Sides -->
-                <div class="price-card">
-                    <div class="price-card-title">🥗 مقبلات وجبنة</div>
-                    <ul class="price-list">
-                        <li><span>جبنة بالطماطم</span><strong>55 EGP</strong></li>
-                        <li><span>سلطة بلدي</span><strong>40 EGP</strong></li>
-                        <li><span>سلطة حمص</span><strong>65 EGP</strong></li>
-                        <li><span>طماطم متبلة</span><strong>40 EGP</strong></li>
-                        <li><span>مخلل</span><strong>35 EGP</strong></li>
-                        <li><span>ليمون معصفر</span><strong>40 EGP</strong></li>
-                    </ul>
-                </div>
-            </div>
 
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="https://wa.me/201283919772?text=أرغب%20في%20طلب%20سحور" class="order-btn" target="_blank"
-                    style="display: inline-block; font-size: 1.1rem; padding: 14px 36px;">📱 اطلب سحورك الآن عبر
-                    واتساب</a>
+                <div style="text-align: center; margin-top: 40px; padding-bottom: 60px;">
+                    <a href="https://wa.me/201283919772?text=أرغب%20في%20طلب%20سحور" class="order-btn" target="_blank"
+                        style="display: inline-block; font-size: 1.1rem; padding: 14px 36px;">📱 اطلب سحورك الآن عبر
+                        واتساب</a>
+                </div>
             </div>
         </section>
 
@@ -717,14 +748,12 @@
         <!-- ===== KONAFA SECTION ===== -->
         <section id="konafa" class="konafa-section menu-page">
             <h2 class="section-title" style="text-align: center; margin-bottom: 8px; color: #f5d78e;">Konafa 🍯</h2>
-            <p style="text-align: center; color: rgba(245,215,142,0.6); font-size: 0.95rem; margin-bottom: 10px;">كنافة
+            <p style="text-align: center; color: rgba(245,215,142,0.6); font-size: 0.95rem; margin-bottom: 40px;">كنافة
                 رمضانية طازجة</p>
-            <p style="text-align: center; color: rgba(255,255,255,0.4); font-size: 0.85rem; margin-bottom: 40px;">السعر
-                شامل 14% ضريبة القيمة المضافة</p>
 
             <div class="konafa-grid">
                 <div class="konafa-card">
-                    <span class="konafa-emoji">🍫</span>
+                    <span class="konafa-emoji">🍪</span>
                     <div class="konafa-name">كنافة نوتيلا</div>
                     <div class="konafa-name-en">Konafa Nutella</div>
                     <span class="konafa-price">110 EGP</span>
@@ -738,14 +767,14 @@
 
                 </div>
                 <div class="konafa-card">
-                    <span class="konafa-emoji">🧁</span>
+                    <span class="konafa-emoji">🍪</span>
                     <div class="konafa-name">كنافة كريمة</div>
                     <div class="konafa-name-en">Konafa Cream</div>
                     <span class="konafa-price">83 EGP</span>
 
                 </div>
                 <div class="konafa-card">
-                    <span class="konafa-emoji">🌰</span>
+                    <span class="konafa-emoji">🍪</span>
                     <div class="konafa-name">كنافة فستق</div>
                     <div class="konafa-name-en">Konafa Pistachio</div>
                     <span class="konafa-price">125 EGP</span>
