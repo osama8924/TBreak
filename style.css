@@ -267,6 +267,36 @@
         transition: box-shadow 0.3s ease; /* keep shadow but remove transform */
     }
 
+    /* Mobile quick links shown in the top bar */
+    .mobile-links {
+        display: none;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    .mobile-links .mobile-link {
+        color: #fff;
+        text-decoration: none;
+        padding: 6px 10px;
+        border-radius: 8px;
+        font-weight: 600;
+        background: rgba(255,255,255,0.02);
+        transition: background 0.12s ease, color 0.12s ease;
+    }
+
+    .mobile-links .mobile-link:hover {
+        background: rgba(255,255,255,0.04);
+        color: var(--main-orange);
+    }
+
+    /* Make mobile-links visible and well placed on small screens */
+    @media (max-width: 768px) {
+        .mobile-links {
+            display: flex;
+            z-index: 1004;
+        }
+    }
+
     .navbar-container {
         gap: 1rem;
     }
@@ -459,6 +489,35 @@ body::before {
 
 .Iftar-full-card:hover .Iftar-image::before {
     background: linear-gradient(180deg, rgba(255, 102, 0, 0.25) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.8) 100%);
+}
+
+/* Order button inside item cards */
+.item-card .order-btn {
+    display: block;
+    width: 100%;
+    background: #ff6600;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 8px;
+    padding: 12px 14px;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 12px;
+    box-shadow: 0 6px 18px rgba(255, 102, 0, 0.15);
+    transition: background 0.12s ease, transform 0.08s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.item-card .order-btn:hover {
+    background: #e65a00;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 480px) {
+    .item-card .order-btn {
+        padding: 14px;
+        font-size: 1rem;
+    }
 }
 
 /* Suhoor Banner - Full Width Like Iftar */

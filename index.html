@@ -1,215 +1,824 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منيو T-Break الرمضاني</title>
+    <title>منيو T-Break الرمضاني 2026</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* ===== HERO SPLIT BANNERS ===== */
+        .hero-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            width: 100%;
+            height: 420px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 60px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            position: relative;
+        }
+
+        .hero-split::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, var(--main-orange), transparent);
+            z-index: 5;
+        }
+
+        .hero-panel {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .hero-panel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+            display: block;
+        }
+
+        .hero-panel:hover img {
+            transform: scale(1.07);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.2) 60%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 28px;
+            z-index: 2;
+            transition: background 0.4s ease;
+        }
+
+        .hero-panel:hover .hero-overlay {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.35) 60%, rgba(255, 102, 0, 0.1) 100%);
+        }
+
+        .hero-overlay h2 {
+            color: #fff;
+            font-size: 2rem;
+            font-weight: 900;
+            margin: 0 0 8px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-overlay p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+            margin: 0 0 12px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--main-orange), #ff8533);
+            color: #000;
+            font-weight: 700;
+            padding: 10px 22px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            width: fit-content;
+            transition: 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 102, 0, 0.4);
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 102, 0, 0.6);
+        }
+
+        .hero-badge {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            background: var(--main-orange);
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 5px 14px;
+            border-radius: 30px;
+            z-index: 3;
+            box-shadow: 0 3px 10px rgba(255, 102, 0, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 3px 10px rgba(255, 102, 0, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 3px 20px rgba(255, 102, 0, 0.9);
+            }
+        }
+
+        /* ===== PRICE TABLE CARD ===== */
+        .price-card {
+            background: rgba(26, 26, 26, 0.65);
+            padding: 28px 25px 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 102, 0, 0.25);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .price-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 102, 0, 0.5);
+        }
+
+        .price-card-title {
+            color: #fff;
+            background: linear-gradient(135deg, var(--main-orange) 0%, #ff8533 100%);
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin: -50px -5px 22px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(255, 102, 0, 0.45);
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .price-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .price-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
+            padding: 11px 0;
+            transition: background 0.2s;
+        }
+
+        .price-list li:last-child {
+            border-bottom: none;
+        }
+
+        .price-list li:hover {
+            background: rgba(255, 102, 0, 0.05);
+            border-radius: 6px;
+            padding: 11px 6px;
+        }
+
+        .price-list li span {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+        }
+
+        .price-list li strong {
+            color: var(--main-orange);
+            font-size: 0.95rem;
+            white-space: nowrap;
+            margin-right: 8px;
+        }
+
+        /* ===== SECTION DIVIDER ===== */
+        .section-divider {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 55px 0 35px;
+        }
+
+        .section-divider::before,
+        .section-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 102, 0, 0.5), transparent);
+        }
+
+        .section-divider h3 {
+            color: var(--main-orange);
+            font-size: 1.5rem;
+            font-weight: 700;
+            white-space: nowrap;
+            text-shadow: 0 0 20px rgba(255, 102, 0, 0.4);
+        }
+
+        /* ===== FULL WIDTH BANNER ===== */
+        .full-banner {
+            width: 100vw;
+            position: relative;
+            right: 50%;
+            left: 50%;
+            margin-right: -50vw;
+            margin-left: -50vw;
+            height: 420px;
+            overflow: hidden;
+            margin-bottom: 50px;
+            border-radius: 0;
+        }
+
+        .full-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 8s ease;
+        }
+
+        .full-banner:hover img {
+            transform: scale(1.04);
+        }
+
+        .full-banner-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.2) 55%, transparent 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: 40px 60px;
+            direction: rtl;
+        }
+
+        .full-banner-text h2 {
+            color: #fff;
+            font-size: 2.4rem;
+            font-weight: 900;
+            margin: 0 0 8px;
+            text-shadow: 0 3px 14px rgba(0, 0, 0, 0.9);
+        }
+
+        .full-banner-text p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .full-banner-tag {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            background: linear-gradient(135deg, var(--main-orange), #ff8533);
+            color: #fff;
+            font-weight: 800;
+            font-size: 0.95rem;
+            padding: 8px 22px;
+            border-radius: 30px;
+            box-shadow: 0 4px 16px rgba(255, 102, 0, 0.55);
+            animation: pulse 2.5s infinite;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            .full-banner {
+                height: 240px;
+            }
+
+            .full-banner-overlay {
+                padding: 22px 28px;
+            }
+
+            .full-banner-text h2 {
+                font-size: 1.5rem;
+            }
+
+            .full-banner-text p {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* ===== KONAFA SECTION ===== */
+        .konafa-section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .konafa-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .konafa-card {
+            background: linear-gradient(145deg, rgba(30, 15, 5, 0.8), rgba(20, 10, 0, 0.9));
+            border: 1px solid rgba(212, 169, 65, 0.35);
+            border-radius: 18px;
+            padding: 30px 20px 22px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: default;
+        }
+
+        .konafa-card::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            left: -40%;
+            width: 180%;
+            height: 180%;
+            background: radial-gradient(circle, rgba(212, 169, 65, 0.08) 0%, transparent 70%);
+            transition: opacity 0.4s;
+            opacity: 0;
+        }
+
+        .konafa-card:hover::before {
+            opacity: 1;
+        }
+
+        .konafa-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(212, 169, 65, 0.7);
+            box-shadow: 0 15px 40px rgba(212, 169, 65, 0.15);
+        }
+
+        .konafa-emoji {
+            font-size: 3rem;
+            margin-bottom: 12px;
+            display: block;
+            filter: drop-shadow(0 0 10px rgba(212, 169, 65, 0.5));
+        }
+
+        .konafa-name {
+            color: #f5d78e;
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .konafa-name-en {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.8rem;
+            margin-bottom: 14px;
+        }
+
+        .konafa-price {
+            display: inline-block;
+            background: linear-gradient(135deg, #d4a017, #f0c040);
+            color: #1a0a00;
+            font-weight: 900;
+            font-size: 1rem;
+            padding: 5px 18px;
+            border-radius: 30px;
+        }
+
+        .konafa-order-btn {
+            display: block;
+            margin-top: 14px;
+            background: transparent;
+            border: 1px solid rgba(212, 169, 65, 0.5);
+            color: #f5d78e;
+            padding: 9px 16px;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.25s ease;
+        }
+
+        .konafa-order-btn:hover {
+            background: rgba(212, 169, 65, 0.2);
+            border-color: #f0c040;
+        }
+
+        /* ===== JUICES SECTION ===== */
+        .juices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 18px;
+        }
+
+        .juice-card {
+            background: rgba(0, 80, 40, 0.25);
+            border: 1px solid rgba(0, 180, 80, 0.25);
+            border-radius: 16px;
+            padding: 22px 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .juice-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(0, 200, 100, 0.5);
+            box-shadow: 0 10px 25px rgba(0, 150, 70, 0.2);
+        }
+
+        .juice-emoji {
+            font-size: 2.4rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .juice-name {
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .juice-price {
+            display: inline-block;
+            background: rgba(0, 180, 80, 0.3);
+            color: #5eff9a;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 3px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 200, 100, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .hero-split {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .hero-panel {
+                height: 220px;
+            }
+
+            .hero-split::after {
+                display: none;
+            }
+
+            .hero-overlay h2 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<!-- Navigation Bar -->
-<nav class="navbar">
-    <div class="navbar-container">
-        <!-- Logo/Brand -->
-        <div class="navbar-brand">
-            <img src="TBreak official logo.png" alt="T-Break Logo" class="navbar-logo">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <img src="TBreak official logo.png" alt="T-Break Logo" class="navbar-logo">
+            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="#home" class="nav-link active">Home</a></li>
+                <li class="nav-item"><a href="#iftar" class="nav-link">Iftar</a></li>
+                <li class="nav-item"><a href="#suhoor" class="nav-link">Suhoor</a></li>
+                <li class="nav-item"><a href="#konafa" class="nav-link">Konafa 🍯</a></li>
+                <li class="nav-item whatsapp-item">
+                    <a href="https://wa.me/201283919772" class="whatsapp-number" target="_blank"
+                        title="الحجز عبر واتس">📱</a>
+                </li>
+                <li class="nav-item search-item">
+                    <input type="text" class="search-input" placeholder="Search...">
+                    <button class="search-btn">🔍</button>
+                </li>
+            </ul>
+            <a href="https://wa.me/201283919772?text=أرغب%20في%20طلب%20وجبة" class="order-btn whatsapp-btn"
+                target="_blank">📱 Order Now</a>
         </div>
+    </nav>
 
-        <!-- Mobile Menu Toggle Button -->
-        <button class="menu-toggle" id="menuToggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
+    <main class="container" id="home">
 
-        <!-- Navigation Menu -->
-        <ul class="nav-menu" id="navMenu">
-            <li class="nav-item">
-                    <a href="#home" class="nav-link active">Home</a>
-            </li>
-            <li class="nav-item">
-                    <a href="#iftar" class="nav-link">Iftar</a>
-            </li>
-            <li class="nav-item">
-                    <a href="#suhoor" class="nav-link">Suhoor</a>
-            </li>
-            <li class="nav-item whatsapp-item">
-                <a href="https://wa.me/201283919772" class="whatsapp-number" target="_blank" title="الحجز عبر واتس">📱</a>
-            </li>
-            <li class="nav-item search-item">
-                <input type="text" class="search-input" placeholder="Search...">
-                <button class="search-btn">🔍</button>
-            </li>
-        </ul>
 
-        <!-- CTA Button -->
-        <a href="https://wa.me/201283919772?text=أرغب%20في%20طلب%20وجبة" class="order-btn whatsapp-btn" target="_blank">📱 Order Now</a>
-    </div>
-</nav>
-
-<main class="container" id="home">
-
-    <section id="iftar" class="menu-page">
-        <h2 class="section-title">Iftar Menu <br><span>منيو الإفطار</span></h2>
-
- 
-        <div class="Iftar-full-card">
-            <div class="Iftar-image">
-                <img src="iftar.jpg" alt="Iftar Menu">
+        <!-- ===== IFTAR SECTION ===== -->
+        <section id="iftar" class="menu-page">
+            <!-- Iftar Title -->
+            <div style="text-align: center; margin-bottom: 22px;">
+                <h2 class="section-title"
+                    style="color: #fff; font-size: 2.2rem; font-weight: 900; margin: 0 0 8px; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">
+                    🌙 إفطار رمضان 2026</h2>
+                <p style="color: rgba(255,255,255,0.65); font-size: 1rem; margin: 0;">أشهى الأطباق على مائدتك الرمضانية
+                    — السعر شامل 14% ضريبة القيمة المضافة</p>
             </div>
 
-        <div class="menu-grid">
-            <div class="item-card">
-                <div class="item-image"><img src="american chicken.jpg" alt="American Chicken"></div>
-                <div class="item-info">
-                    <h3>أمريكان تشيكن <span>American Chicken</span></h3>
-                    <p>صدور دجاج مقلية مقرمشة على الطريقة الأمريكية</p>
-                    <span class="price">250 EGP</span>
+            <!-- Iftar Banner - Full Width -->
+            <div class="full-banner">
+                <img src="iftar.jpg" alt="Iftar Menu 2026">
+                <span class="full-banner-tag">الإفطار</span>
+            </div>
+
+            <!-- Main Dishes Cards -->
+            <div class="menu-grid">
+                <div class="item-card">
+                    <div class="item-image"><img src="chicken lemon rosemary.jpg" alt="تشيكن ليمون روزماري"></div>
+                    <div class="item-info">
+                        <h3>تشيكن ليمون روزماري <span>Chicken Lemon Rosemary</span></h3>
+                        <p>دجاج مشوي بصوص الليمون المنعش وأوراق الروزماري</p>
+                        <span class="price">305 EGP</span>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="item-image"><img src="chicken parmesan.jpg" alt="تشيكن برميجان"></div>
+                    <div class="item-info">
+                        <h3>تشيكن برميجان <span>Chicken Parmesan</span></h3>
+                        <p>دجاج مغطى بجبنة البارميزان وصوص الطماطم الإيطالي</p>
+                        <span class="price">315 EGP</span>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="item-image"><img src="american chicken.jpg" alt="تشيكن امريكان"></div>
+                    <div class="item-info">
+                        <h3>تشيكن امريكان <span>American Chicken</span></h3>
+                        <p>صدور دجاج مقلية مقرمشة على الطريقة الأمريكية</p>
+                        <span class="price">305 EGP</span>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="item-image"><img src="shish tawook.jpg" alt="شيش طاووق"></div>
+                    <div class="item-info">
+                        <h3>شيش طاووق <span>Shish Tawook</span></h3>
+                        <p>قطع دجاج متبلة ومشوية بخلطة TBreak المميزة</p>
+                        <span class="price">285 EGP</span>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="item-image"><img src="chicken fajita.jpg" alt="تشيكن فاهيتا"></div>
+                    <div class="item-info">
+                        <h3>تشيكن فاهيتا <span>Chicken Fajita</span></h3>
+                        <p>شرائح دجاج مشوية مع الفلفل والألوان والبهارات المكسيكية</p>
+                        <span class="price">295 EGP</span>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="item-image"><img src="chicken corden bleu.jpg" alt="كوردن بلو"></div>
+                    <div class="item-info">
+                        <h3>كوردن بلو <span>Chicken Cordon Bleu</span></h3>
+                        <p>صدور دجاج محشوة بالجبن السويسري واللحم المدخن</p>
+                        <span class="price">320 EGP</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="item-card">
-                <div class="item-image"><img src="chicken fajita.jpg" alt="Chicken Fajita"></div>
-                <div class="item-info">
-                    <h3>تشيكن فاهيتا <span>Chicken Fajita</span></h3>
-                    <p>شرائح دجاج مشوية مع الفلفل والألوان والبهارات المكسيكية</p>
-                    <span class="price">230 EGP</span>
+            <!-- Soups & Appetizers -->
+            <div class="section-divider" style="margin-top: 55px;">
+                <h3>🍲 الشوربة والمقبلات</h3>
+            </div>
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 28px; direction: rtl;">
+                <div class="price-card">
+                    <div class="price-card-title">🍲 الشوربـة</div>
+                    <ul class="price-list">
+                        <li><span>شوربة كريمة فراخ</span><strong>75 EGP</strong></li>
+                        <li><span>شوربة كريمة مشروم</span><strong>65 EGP</strong></li>
+                        <li><span>شوربة لسان عصفور</span><strong>45 EGP</strong></li>
+                    </ul>
+                </div>
+                <div class="price-card">
+                    <div class="price-card-title">🥗 المقبـلات</div>
+                    <ul class="price-list">
+                        <li><span>بطاطس محمرة</span><strong>65 EGP</strong></li>
+                        <li><span>دبوس فرايد</span><strong>185 EGP</strong></li>
+                        <li><span>موتزريلا استيك</span><strong>80 EGP</strong></li>
+                        <li><span>بوتيتو بولز</span><strong>75 EGP</strong></li>
+                    </ul>
+                </div>
+                <div class="price-card">
+                    <div class="price-card-title">🍽️ أطباق إضافية</div>
+                    <ul class="price-list">
+                        <li><span>سبانش رول</span><strong>300 EGP</strong></li>
+                        <li><span>كفتة وايت صوص</span><strong>295 EGP</strong></li>
+                        <li><span>تشيكن كرانشي</span><strong>305 EGP</strong></li>
+                    </ul>
                 </div>
             </div>
 
-            <div class="item-card">
-                <div class="item-image"><img src="shish tawook.jpg" alt="Shish Tawook"></div>
-                <div class="item-info">
-                    <h3>شيش طاووك <span>Shish Tawook</span></h3>
-                    <p>قطع دجاج متبلة ومشوية بخلطة TBreak المميزة</p>
-                    <span class="price">240 EGP</span>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="https://wa.me/201283919772?text=أرغب%20في%20طلب%20إفطار" class="order-btn" target="_blank"
+                    style="display: inline-block; font-size: 1.1rem; padding: 14px 36px;">📱 اطلب إفطارك الآن عبر
+                    واتساب</a>
+            </div>
+        </section>
+
+        <!-- ===== SUHOOR SECTION ===== -->
+        <section id="suhoor" class="menu-page">
+            <!-- Suhoor Title -->
+            <div style="text-align: center; margin-bottom: 22px;">
+                <h2 class="section-title"
+                    style="color: #fff; font-size: 2.2rem; font-weight: 900; margin: 0 0 8px; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">
+                    ⭐ سحور رمضان 2026</h2>
+                <p style="color: rgba(255,255,255,0.65); font-size: 1rem; margin: 0;">وجبة شهية قبيل الفجر — السعر شامل
+                    14% ضريبة القيمة المضافة</p>
+            </div>
+
+            <!-- Suhoor Banner - Full Width -->
+            <div class="full-banner">
+                <img src="sahour6.jpg" alt="Suhoor Menu 2026">
+                <span class="full-banner-tag" style="right: auto; left: 30px;">السحور</span>
+            </div>
+
+            <!-- Suhoor images gallery -->
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 50px;">
+                <img src="sahour1.jpg" alt="Suhoor 1"
+                    style="width: 100%; height: 160px; object-fit: cover; border-radius: 14px; border: 1px solid rgba(255,102,0,0.2); box-shadow: 0 5px 15px rgba(0,0,0,0.4);">
+                <img src="sahour2.jpg" alt="Suhoor 2"
+                    style="width: 100%; height: 160px; object-fit: cover; border-radius: 14px; border: 1px solid rgba(255,102,0,0.2); box-shadow: 0 5px 15px rgba(0,0,0,0.4);">
+                <img src="sahour3.jpg" alt="Suhoor 3"
+                    style="width: 100%; height: 160px; object-fit: cover; border-radius: 14px; border: 1px solid rgba(255,102,0,0.2); box-shadow: 0 5px 15px rgba(0,0,0,0.4);">
+                <img src="sahour4.jpg" alt="Suhoor 4"
+                    style="width: 100%; height: 160px; object-fit: cover; border-radius: 14px; border: 1px solid rgba(255,102,0,0.2); box-shadow: 0 5px 15px rgba(0,0,0,0.4);">
+            </div>
+
+            <!-- Suhoor Price Tables -->
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 28px; direction: rtl;">
+                <!-- Foul -->
+                <div class="price-card">
+                    <div class="price-card-title">🫘 فـول</div>
+                    <ul class="price-list">
+                        <li><span>فول بزيت الذرة</span><strong>55 EGP</strong></li>
+                        <li><span>فول بزيت الزيتون</span><strong>65 EGP</strong></li>
+                        <li><span>فول بالليمون المعصفر</span><strong>65 EGP</strong></li>
+                        <li><span>فول بيض مسلوق</span><strong>65 EGP</strong></li>
+                        <li><span>فول بالبسطرمة</span><strong>70 EGP</strong></li>
+                        <li><span>طاجن اسكندراني بالحمص والبيض</span><strong>65 EGP</strong></li>
+                    </ul>
+                </div>
+                <!-- Taameya & Eggs -->
+                <div class="price-card">
+                    <div class="price-card-title">🍳 طعمية والبيض</div>
+                    <ul class="price-list">
+                        <li><span>طعمية سادة</span><strong>40 EGP</strong></li>
+                        <li><span>طعمية كيري</span><strong>65 EGP</strong></li>
+                        <li><span>طعمية بالخلطة</span><strong>45 EGP</strong></li>
+                        <li><span>بيض مسلوق</span><strong>50 EGP</strong></li>
+                        <li><span>بيض اومليت</span><strong>55 EGP</strong></li>
+                        <li><span>بيض بالبسطرمة</span><strong>65 EGP</strong></li>
+                    </ul>
+                </div>
+                <!-- Salads & Sides -->
+                <div class="price-card">
+                    <div class="price-card-title">🥗 مقبلات وجبنة</div>
+                    <ul class="price-list">
+                        <li><span>جبنة بالطماطم</span><strong>55 EGP</strong></li>
+                        <li><span>سلطة بلدي</span><strong>40 EGP</strong></li>
+                        <li><span>سلطة حمص</span><strong>65 EGP</strong></li>
+                        <li><span>طماطم متبلة</span><strong>40 EGP</strong></li>
+                        <li><span>مخلل</span><strong>35 EGP</strong></li>
+                        <li><span>ليمون معصفر</span><strong>40 EGP</strong></li>
+                    </ul>
                 </div>
             </div>
 
-            <div class="item-card">
-                <div class="item-image"><img src="chicken parmesan.jpg" alt="Chicken Parmesan"></div>
-                <div class="item-info">
-                    <h3>تشيكن بارميزان <span>Chicken Parmesan</span></h3>
-                    <p>دجاج مغطى بجبنة البارميزان وصوص الطماطم الإيطالي</p>
-                    <span class="price">270 EGP</span>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="https://wa.me/201283919772?text=أرغب%20في%20طلب%20سحور" class="order-btn" target="_blank"
+                    style="display: inline-block; font-size: 1.1rem; padding: 14px 36px;">📱 اطلب سحورك الآن عبر
+                    واتساب</a>
+            </div>
+        </section>
+
+        <!-- ===== JUICES SECTION (منفصل) ===== -->
+        <section id="juices" class="menu-page">
+            <h2 class="section-title" style="text-align: center; margin-bottom: 8px;">Ramadan Drinks</h2>
+            <p style="text-align: center; color: #ccc; font-size: 0.95rem; margin-bottom: 35px;">عصائر رمضان الطازجة —
+                متوفرة مع الإفطار والسحور</p>
+            <div class="juices-grid">
+                <div class="juice-card">
+                    <span class="juice-emoji">�</span>
+                    <div class="juice-name">سوبيا</div>
+                    <span class="juice-price">95 EGP</span>
+                </div>
+                <div class="juice-card">
+                    <span class="juice-emoji">🧉</span>
+                    <div class="juice-name">تمر هندي</div>
+                    <span class="juice-price">85 EGP</span>
+                </div>
+                <div class="juice-card">
+                    <span class="juice-emoji">�</span>
+                    <div class="juice-name">كركدية</div>
+                    <span class="juice-price">85 EGP</span>
+                </div>
+                <div class="juice-card">
+                    <span class="juice-emoji">🧃</span>
+                    <div class="juice-name">خروب</div>
+                    <span class="juice-price">85 EGP</span>
                 </div>
             </div>
+        </section>
 
-            <div class="item-card">
-                <div class="item-image"><img src="chicken lemon rosemary.jpg" alt="Chicken Lemon Rosemary"></div>
-                <div class="item-info">
-                    <h3>دجاج بالليمون <span>Chicken Lemon Rosemary</span></h3>
-                    <p>دجاج مشوي بصوص الليمون المنعش وأوراق الروزماري</p>
-                    <span class="price">260 EGP</span>
+        <!-- ===== KONAFA SECTION ===== -->
+        <section id="konafa" class="konafa-section menu-page">
+            <h2 class="section-title" style="text-align: center; margin-bottom: 8px; color: #f5d78e;">Konafa 🍯</h2>
+            <p style="text-align: center; color: rgba(245,215,142,0.6); font-size: 0.95rem; margin-bottom: 10px;">كنافة
+                رمضانية طازجة</p>
+            <p style="text-align: center; color: rgba(255,255,255,0.4); font-size: 0.85rem; margin-bottom: 40px;">السعر
+                شامل 14% ضريبة القيمة المضافة</p>
+
+            <div class="konafa-grid">
+                <div class="konafa-card">
+                    <span class="konafa-emoji">🍫</span>
+                    <div class="konafa-name">كنافة نوتيلا</div>
+                    <div class="konafa-name-en">Konafa Nutella</div>
+                    <span class="konafa-price">110 EGP</span>
+
+                </div>
+                <div class="konafa-card">
+                    <span class="konafa-emoji">🍪</span>
+                    <div class="konafa-name">كنافة لوتس</div>
+                    <div class="konafa-name-en">Konafa Lotus</div>
+                    <span class="konafa-price">110 EGP</span>
+
+                </div>
+                <div class="konafa-card">
+                    <span class="konafa-emoji">🧁</span>
+                    <div class="konafa-name">كنافة كريمة</div>
+                    <div class="konafa-name-en">Konafa Cream</div>
+                    <span class="konafa-price">83 EGP</span>
+
+                </div>
+                <div class="konafa-card">
+                    <span class="konafa-emoji">🌰</span>
+                    <div class="konafa-name">كنافة فستق</div>
+                    <div class="konafa-name-en">Konafa Pistachio</div>
+                    <span class="konafa-price">125 EGP</span>
+
                 </div>
             </div>
+        </section>
 
-            <div class="item-card">
-                <div class="item-image"><img src="chicken corden bleu.jpg" alt="Chicken Cordon Bleu"></div>
-                <div class="item-info">
-                    <h3>كوردون بلو <span>Chicken Cordon Bleu</span></h3>
-                    <p>صدور دجاج محشوة بالجبن السويسري واللحم المدخن</p>
-                    <span class="price">280 EGP</span>
+        <!-- ===== FULL MENU PDF LINK ===== -->
+        <div style="text-align: center; padding: 50px 20px 10px;">
+            <div
+                style="display: inline-flex; align-items: center; gap: 22px; background: rgba(255,102,0,0.07); border: 1px solid rgba(255,102,0,0.3); border-radius: 20px; padding: 25px 40px; backdrop-filter: blur(12px); flex-wrap: wrap; justify-content: center; max-width: 700px;">
+                <div style="text-align: right;">
+                    <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem; margin: 0 0 5px;">هل تريد تصفح المنيو
+                        الخاص بنا؟</p>
+                    <p style="color: #fff; font-size: 1.15rem; font-weight: 700; margin: 0;">🍴 T-Break Menu </p>
+                    <p style="color: rgba(255,200,100,0.7); font-size: 0.82rem; margin: 5px 0 0; line-height: 1.6;">⚠️
+                        هذا المنيو يحتوي على أصناف المطعم الاعتيادية<br>ولا يشمل أصناف منيو رمضان الموجودة في هذه الصفحة
+                    </p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="suhoor" class="menu-page">
-        <h2 class="section-title">Suhoor Menu <br><span>منيو السحور</span></h2>
-        
-        <div class="suhoor-full-card">
-            <div class="suhoor-image">
-                <img src="sahour6.jpg" alt="Suhoor Menu">
-            </div>
-        </div>
-
-        <div class="menu-grid">
-        <div class="item-card">
-            <div class="item-image">
-                <img src="sahour1.jpg" alt="Suhoor Item">
-            </div>
-            <div class="item-info">
-                <h3>سحور T-Break الملوكي <span>Royal Suhoor</span></h3>
-                <p>تشكيلة فاخرة من الفول والبيض والبطاطس</p>
-                <span class="price">180 EGP</span>
-            </div>
-        </div>
-
-        <div class="item-card">
-            <div class="item-image">
-                <img src="sahour2.jpg" alt="Suhoor Item">
-            </div>
-            <div class="item-info">
-                <h3>طاسة السحور الأساسية <span>Main Suhoor Tray</span></h3>
-                <p>فول بالخلطة، بيض، زبادي بلدي، وفلافل</p>
-                <span class="price">150 EGP</span>
-            </div>
-        </div>
-
-        <div class="item-card">
-            <div class="item-image">
-                <img src="sahour3.jpg" alt="Suhoor Item">
-            </div>
-            <div class="item-info">
-                <h3>- سفرة السحور <span>Suhoor Platter</span></h3>
-                <p>بيض عيون بالبسطرمة مع تشكيلة أجبان</p>
-                <span class="price">120 EGP</span>
-            </div>
-            </div>
-            <div class="item-card">
-                <div class="item-image">
-                    <img src="sahour4.jpg" alt="Suhoor Item">
-                </div>
-                <div class="item-info">
-                    <h3>السحور المميز <span>Special Suhoor</span></h3>
-                    <p>السحور المميز (فول- فلافل -فلافل بالسمسم- ميكس جبن - بابا غنوج -سلطه خضراء -عيش   )</p>
-                    <span class="price">120 EGP</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <h2 class="section-title">Contact Us 📞</h2>
-        <div class="contact-container">
-            <div class="contact-card">
-                <div class="contact-icon">📱</div>
-                <h3>WhatsApp</h3>
-                <p>Order via WhatsApp</p>
-                <a href="https://wa.me/201283919772?text=أرغب%20في%20طلب%20وجبة" class="contact-link" target="_blank">
-                    01283919772
+                <a href="https://drive.google.com/file/d/1XGI96W0XVO8gndI4dmWnv7GbDkOY7of9/view?usp=sharing"
+                    target="_blank" rel="noopener noreferrer"
+                    style="display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, var(--main-orange), #ff8533); color: #000; font-weight: 800; font-size: 1rem; padding: 14px 30px; border-radius: 50px; text-decoration: none; box-shadow: 0 6px 22px rgba(255,102,0,0.45); white-space: nowrap; transition: all 0.3s ease;"
+                    onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 12px 30px rgba(255,102,0,0.65)';"
+                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 22px rgba(255,102,0,0.45)';">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+                    </svg>
+                    عرض المنيو الكامل PDF
                 </a>
             </div>
-            <div class="contact-card">
-    <div class="contact-icon">📍</div>
-    <h3>Location</h3>
-    <p>Click to get directions</p>
-    <a href="https://maps.app.goo.gl/atExTbE6HXTtjP6o9" target="_blank" style="color: inherit; text-decoration: none;">
-        <p class="location">Chill Out, Mohammed Nagib Axis<br>Industrial Area, New Cairo 3</p>
-    </a>
-</div>
-            <div class="contact-card">
-                <div class="contact-icon">⏰</div>
-                <h3>Opening Hours</h3>
-                <p>During Ramadan</p>
-                <p class="hours" dir="ltr">2:00 PM – 3:00 AM</p>
-            </div>
         </div>
-    </section>
 
-</main>
+        <!-- ===== CONTACT SECTION ===== -->
+        <section id="contact" class="contact-section">
+            <h2 class="section-title">Contact Us 📞</h2>
+            <div class="contact-container">
+                <div class="contact-card">
+                    <div class="contact-icon">📱</div>
+                    <h3>WhatsApp</h3>
+                    <p>Order via WhatsApp</p>
+                    <a href="https://wa.me/201283919772?text=أرغب%20في%20طلب%20وجبة" class="contact-link"
+                        target="_blank">01283919772</a>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">📍</div>
+                    <h3>Location</h3>
+                    <p>Click to get directions</p>
+                    <a href="https://maps.app.goo.gl/atExTbE6HXTtjP6o9" target="_blank"
+                        style="color: inherit; text-decoration: none;">
+                        <p class="location">Chill Out, Mohammed Nagib Axis<br>Industrial Area, New Cairo 3</p>
+                    </a>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">⏰</div>
+                    <h3>Opening Hours</h3>
+                    <p>During Ramadan</p>
+                    <p class="hours" dir="ltr">2:00 PM – 3:00 AM</p>
+                </div>
+            </div>
+        </section>
 
-<!-- Floating WhatsApp Button -->
-<a href="https://wa.me/201283919772?text=مرحبا%20TBreak" class="floating-whatsapp" target="_blank">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.95 1.495 9.866 9.866 0 10 13.955 9.017 9.866 9.866 0 00-9.001-10.512z"/>
-    </svg>
-</a>
+    </main>
 
-<script src="main.js"></script>
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/201283919772?text=مرحبا%20TBreak" class="floating-whatsapp" target="_blank">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.95 1.495 9.866 9.866 0 10 13.955 9.017 9.866 9.866 0 00-9.001-10.512z" />
+        </svg>
+    </a>
+
+    <script src="main.js"></script>
 </body>
+
 </html>

@@ -124,15 +124,29 @@ document.addEventListener('DOMContentLoaded', function() {
     /* ========================================
        Order Button Action
        ======================================== */
-    const orderBtn = document.querySelector('.order-btn');
-    if (orderBtn) {
-        orderBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            // Redirect to messaging or booking page
-            const message = encodeURIComponent('أرغب في طلب وجبة من TBreak');
-            window.location.href = `https://wa.me/?text=${message}`;
-        });
-    }
+    // Keep existing top CTA behavior unchanged (the top CTA uses .order-btn)
+    // For item-card order buttons, populate Whatsapp links dynamically from the h3 title
+    const cardOrderBtns = document.querySelectorAll('.item-card .order-btn');
+    cardOrderBtns.forEach(btn => {
+        const card = btn.closest('.item-card');
+        if (!card) return;
+        const h3 = card.querySelector('.item-info h3');
+        let mealName = '';
+        if (h3) {
+            // Prefer the text node before any <span>
+            if (h3.firstChild && h3.firstChild.nodeType === Node.TEXT_NODE) {
+                mealName = h3.firstChild.nodeValue.trim();
+            }
+            if (!mealName) {
+                mealName = h3.textContent.trim();
+            }
+        }
+        const message = `أرغب في طلب وجبة: ${mealName}`;
+        const url = 'https://wa.me/201283919772?text=' + encodeURIComponent(message);
+        btn.setAttribute('href', url);
+        btn.setAttribute('target', '_blank');
+        btn.setAttribute('rel', 'noopener noreferrer');
+    });
 });
 
 /* ========================================
