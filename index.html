@@ -306,8 +306,8 @@
             }
 
             .overlap-content {
-                margin-top: -175px;
-                /* Half of 350px banner height */
+                margin-top: -80px;
+                /* Reduced for mobile - keeps image visible */
                 padding: 0 15px;
             }
 
@@ -716,69 +716,40 @@
             </div>
         </section>
 
-        <!-- ===== JUICES SECTION (منفصل) ===== -->
+        <!-- ===== JUICES SECTION ===== -->
         <section id="juices" class="menu-page">
-            <h2 class="section-title" style="text-align: center; margin-bottom: 8px;">Ramadan Drinks</h2>
+            <h2 class="section-title" style="text-align: center; margin-bottom: 8px;">Ramadan Drinks 🧃</h2>
             <p style="text-align: center; color: #ccc; font-size: 0.95rem; margin-bottom: 35px;">عصائر رمضان الطازجة —
                 متوفرة مع الإفطار والسحور</p>
-            <div class="juices-grid">
-                <div class="juice-card">
-                    <span class="juice-emoji">�</span>
-                    <div class="juice-name">سوبيا</div>
-                    <span class="juice-price">95 EGP</span>
-                </div>
-                <div class="juice-card">
-                    <span class="juice-emoji">🧉</span>
-                    <div class="juice-name">تمر هندي</div>
-                    <span class="juice-price">85 EGP</span>
-                </div>
-                <div class="juice-card">
-                    <span class="juice-emoji">�</span>
-                    <div class="juice-name">كركدية</div>
-                    <span class="juice-price">85 EGP</span>
-                </div>
-                <div class="juice-card">
-                    <span class="juice-emoji">🧃</span>
-                    <div class="juice-name">خروب</div>
-                    <span class="juice-price">85 EGP</span>
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 28px; direction: rtl; max-width: 900px; margin: 0 auto;">
+                <div class="price-card">
+                    <div class="price-card-title">🧃 عصائر رمضان</div>
+                    <ul class="price-list">
+                        <li><span>سوبيا</span><strong>95 EGP</strong></li>
+                        <li><span>تمر هندي</span><strong>85 EGP</strong></li>
+                        <li><span>كركدية</span><strong>85 EGP</strong></li>
+                        <li><span>خروب</span><strong>85 EGP</strong></li>
+                    </ul>
                 </div>
             </div>
         </section>
 
         <!-- ===== KONAFA SECTION ===== -->
-        <section id="konafa" class="konafa-section menu-page">
+        <section id="konafa" class="menu-page">
             <h2 class="section-title" style="text-align: center; margin-bottom: 8px; color: #f5d78e;">Konafa 🍯</h2>
             <p style="text-align: center; color: rgba(245,215,142,0.6); font-size: 0.95rem; margin-bottom: 40px;">كنافة
                 رمضانية طازجة</p>
-
-            <div class="konafa-grid">
-                <div class="konafa-card">
-                    <span class="konafa-emoji">🍪</span>
-                    <div class="konafa-name">كنافة نوتيلا</div>
-                    <div class="konafa-name-en">Konafa Nutella</div>
-                    <span class="konafa-price">110 EGP</span>
-
-                </div>
-                <div class="konafa-card">
-                    <span class="konafa-emoji">🍪</span>
-                    <div class="konafa-name">كنافة لوتس</div>
-                    <div class="konafa-name-en">Konafa Lotus</div>
-                    <span class="konafa-price">110 EGP</span>
-
-                </div>
-                <div class="konafa-card">
-                    <span class="konafa-emoji">🍪</span>
-                    <div class="konafa-name">كنافة كريمة</div>
-                    <div class="konafa-name-en">Konafa Cream</div>
-                    <span class="konafa-price">83 EGP</span>
-
-                </div>
-                <div class="konafa-card">
-                    <span class="konafa-emoji">🍪</span>
-                    <div class="konafa-name">كنافة فستق</div>
-                    <div class="konafa-name-en">Konafa Pistachio</div>
-                    <span class="konafa-price">125 EGP</span>
-
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 28px; direction: rtl; max-width: 900px; margin: 0 auto;">
+                <div class="price-card">
+                    <div class="price-card-title">🍯 كنافة</div>
+                    <ul class="price-list">
+                        <li><span>كنافة نوتيلا</span><strong>110 EGP</strong></li>
+                        <li><span>كنافة لوتس</span><strong>110 EGP</strong></li>
+                        <li><span>كنافة كريمة</span><strong>83 EGP</strong></li>
+                        <li><span>كنافة فستق</span><strong>125 EGP</strong></li>
+                    </ul>
                 </div>
             </div>
         </section>
